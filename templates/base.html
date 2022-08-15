@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Personal page</title>
+
+
+	{%include 'snippets/header.html'%}
+	{%include 'snippets/main_css.html'%}
+</head>
+<body>
+	
+	
+	<style>
+	.home{
+		min-height: 100vh;
+		height: 100%;
+	}
+	</style>
+	
+	<div class='home'>
+		
+		{%block content%}
+
+
+		{%endblock content%}
+
+	</div>
+	
+
+
+
+	{%include 'snippets/footer.html'%}
+	
+
+</body>
+
+	
+
+
+</html>

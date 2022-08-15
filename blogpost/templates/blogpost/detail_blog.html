@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<style type="text/css">
+	
+	.card{
+		max-width: 650px;
+	}
+
+	.container{
+		padding: 15px;
+	}
+</style>
+
+
+
+<div class="container">
+	<div class="row">
+		
+		<div class="card m-auto">
+			<img class="card-img-top" src="{{blog_post.image.url}}">
+			<div class="card-body my-2">
+				<h3 class="card-title">{{blog_post.title}}</h3>
+				<p class="card-text">{{blog_post.body|safe}}</p>
+				{%if blog_post.author == request.user%}
+					<a href="{%url 'blogpost:update' blog_post.slug%}" class="btn btn">Update post</a>
+				{%endif%}
+			</div>
+
+			<div class="card-footer text-muted">
+				Updated {{blog_post.date_updated}} by {{blog_post.author}}
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{%endblock content%}

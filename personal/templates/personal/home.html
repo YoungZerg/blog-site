@@ -1,0 +1,108 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+
+<style type="text/css">
+	@media (max-width:  760px){
+		.right-column{
+			margin-left: 0px;
+		}
+	}
+
+	@media (min-width:  760px){
+		.right-column{
+			margin-left: 25px;
+		}
+	}
+
+	.blog-post-container{
+		background-color: #fff;
+		margin-bottom: 20px;
+		width: 100%;
+	}
+
+	.create-post-bar{
+		background-color: #fff;
+		margin-bottom: 20px;
+	}
+
+	.left-column{
+		padding: 0px;
+	}
+
+	.right-column{
+		padding: 0px;
+	}
+
+	.lead{
+		font-size: 16px;
+	}
+</style>
+
+ <div class="container">
+ 	<div class="row">
+ 		
+
+
+ 		<div class="left-column col-lg-7 offset-lg-1">
+ 			
+
+
+
+ 			<div class="d-lg-none mb-3">
+ 				<div class="card m-auto d-flex flex-column p-3">
+ 					<img class="img-fluid d-block m-auto pb-2" src="{%static 'blog-file.jpg'%}" width="80" height="80">
+
+ 					<p class="lead">Hello, this is very new blog site. Make posts!</p>
+
+ 					<p class="m-auto"><a class="btn btn-primary" href="{%url 'blogpost:create'%}">Create new post</a></p>
+ 				</div>
+ 			</div>
+
+
+
+ 			{%if blog_posts%}
+ 				{%for post in blog_posts%}
+ 					<div class="blog-post-container">
+ 						{%include 'blogpost/snippets/post_snippet.html' with blog_post=post%}
+ 					</div>
+ 				{%endfor%}
+ 			{%else%}
+
+ 				<div class="blog-post-container">
+ 					{%include 'blogpost/snippets/post_snippet.html' with query=query%}
+ 				</div>
+ 			{%endif%}
+
+
+
+ 			{%include 'blogpost/snippets/blogpost_pagination.html' with blog_posts=blog_posts%}
+
+
+
+ 			<div class="rigth-column col-lg-3 d-lg-flex d-none flex-column">
+ 				
+ 				<div class="card create-post-bar d-flex flex-column p-3">
+ 					<img class="img-fluid d-block m-auto pb-2" src="{%static 'blog-file.jpg'%}" width="80" height="80">
+ 				
+ 					<p class="lead">Hello, this is very new bog site. Make posts!</p>
+ 					<p class="m-auto"><a class="btn btn-primary" href="{%url 'blogpost:create'%}">Create new post</a></p>
+ 				</div>
+ 			</div>
+
+
+ 		</div>
+ 	</div>
+ </div>
+
+
+
+	
+{%endblock content%}
+
+
+
+
+
+

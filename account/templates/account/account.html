@@ -1,0 +1,112 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<style type="text/css">
+	
+		.form-change-info {
+	  width: 100%;
+	  max-width: 330px;
+	  padding: 15px;
+	  margin: auto;
+	}
+	
+	
+	.form-change-info .form-floating:focus-within {
+	  z-index: 2;
+	}
+	
+	.form-change-info input[type="email"] {
+	  margin-bottom: 10px;
+	  border-bottom-right-radius: 0;
+	  border-bottom-left-radius: 0;
+	}
+	
+	.form-change-info input[type="username"] {
+	  margin-bottom: 10px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+
+
+	.all-posts{
+		max-width: 400px;
+		width: 100%;
+		margin: auto;
+	}
+
+</style>
+
+
+
+<main class="form-change-info">
+  <form method="POST">
+    {%csrf_token%}
+
+    <h1 class="h3 mb-3 fw-normal">Account Details</h1>
+
+    <div class="form-floating">
+      <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email address" value={{account_form.initial.email}}>
+      <label for="inputEmail">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="text" name="username" class="form-control" id="inputUsername" placeholder="Username" value={{account_form.initial.username}}>
+      <label for="inputUsername">Username</label>
+    </div>
+
+
+	{%for field in account_form%}
+		<p>
+			{%for err in field.errors%}
+			<p style="color: red;">{{err}}</p>
+		
+			{%endfor%}
+		</p>
+
+	{%endfor%}
+	
+
+
+	{%if account_form.non_field_errors%}
+		<div style='color: red'>
+			<p>{{account_form.non_field_errors}}</p>
+		</div>
+	{%endif%}
+
+	{%if all_is_good%}
+    
+		<p style="color: rgb(0, 204, 204); text-align: center;">{{all_is_good}}</p>
+	{%endif%}
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Save Changes</button>
+    
+  </form>
+</main>
+
+<div class="d-flex flex-column">
+	<a class="m-auto" href="{%url 'password_change'%}">Change Password</a>
+</div>
+
+
+
+<div class="container mt-4 p-4">
+	<div class="row">
+		<div class="all-posts">
+				<h3 class="mb-3 font-weigth-normal">Your Posts:</h3>
+				{%if all_posts%}
+					<ul>
+						{%for post in all_posts%}
+							<a href="{%url 'blogpost:detail' post.slug%}" style="text-decoration: none;"><li class="list-group-item">{{post}}</li></a>
+						{%endfor%}
+					</ul>
+				{%else%}
+					<p>You haven't made any posts yet. Wanna create <a href="{%url 'blogpost:create'%}">new</a>?</p>
+				{%endif%}
+		</div>
+	</div>
+</div>
+
+
+
+
+{%endblock content%}
